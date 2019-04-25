@@ -47,6 +47,7 @@ export default class ExpenseItem extends React.Component {
               {item.store}
             </Text>
             {
+<<<<<<< HEAD
               typeof item.items.length === 0 ? <React.Fragment/> :
                 item.items.map((x, key) => {
                   return (
@@ -58,17 +59,41 @@ export default class ExpenseItem extends React.Component {
                           {x.name} , ${x.price}
                         </Text>
                         : <React.Fragment/>
+=======
+              typeof item.items.length === 0 ? <React.Fragment /> :
+                item.items.map((x) => {
+                  return (
+                    <React.Fragment key={Math.random(100)}>
+                      {x &&
+                        <Text>
+                          {x.name} , ${x.price}
+                        </Text>
+>>>>>>> working Total Amount
                       }
                     </React.Fragment>
                   );
                 })
             }
-            <Text style={{fontSize: 20}}>
+            <Text style={{ fontSize: 20 }}>
               total: ${item.total}
             </Text>
           </TouchableOpacity>
         </View>
+<<<<<<< HEAD
         {this.renderDeleteButton(item)}
+=======
+        <View style={styles.deleteBtn}>
+<<<<<<< HEAD
+          <Button title="x" color="#ff0000"
+            onPress={() => {  
+=======
+          <Button title="x"
+            onPress={() => {
+>>>>>>> working Total Amount
+              this.props.handleDelete(item.id);
+            }} />
+        </View>
+>>>>>>> working Total Amount
       </View>
     );
   }
