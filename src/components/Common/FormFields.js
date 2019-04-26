@@ -6,13 +6,6 @@ import { connect } from "react-redux";
 import CommonButton from "./CommonButton";
 import AddItemButton from "../ItemEntry/AddItemButton";
 
-
-
-
-
-
-
-
 export default class FormFields extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +28,6 @@ export default class FormFields extends Component {
       [id]: val
     });
   }
-
-
 
   componentDidMount() {
 <<<<<<< HEAD
@@ -144,47 +135,33 @@ export default class FormFields extends Component {
 
       }
 
-    }
-
-    else {
-
+    } else {
       for (let i = 0; i < this.state.pairCount + 1; i++) {
-
         inputElements.push(<TextInput
           placeholder={`${inputType} ${i + 1}`}
           id={inputId}
           name={i}
           key={`${inputId}-${i}`}
           onChangeText={(text) => this.handleItemChange(i, inputId, text)}
-
-
-
         />);
-
-
-
-
       }
     }
-
 
     if (inputId === "price") {
-
       for (let i = 0; i < this.state.items.length; i++) {
-
         tmpPrice = Number(tmpPrice) + Number(this.state.items[i].price);
-
       }
       this.total = tmpPrice;
-    }
+      for (i = 0; i < this.state.fields.length; i++) {
+        if (this.state.fields[i].id === "total") {
+          this.total ? this.state.fields[i].name = this.total.toString() : "";
 
+        }
+      }
+
+    }
     return inputElements;
   }
-
-
-
-
-
 
   addKeyValuePair() {
     let oldItems = [...this.state.items];
@@ -194,7 +171,6 @@ export default class FormFields extends Component {
       pairCount: this.state.pairCount + 1,
     });
   }
-
 
   renderItemsEntry() {
     let entries = [1, 0];
