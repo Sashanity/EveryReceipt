@@ -6,9 +6,13 @@ import { connect } from "react-redux";
 import CommonButton from "./CommonButton";
 import AddItemButton from "../ItemEntry/AddItemButton";
 
+
+
+
 export default class FormFields extends Component {
   constructor(props) {
     super(props);
+    this.manualInput = false;
     this.total = 0;
     this.state = {
       pairCount: 0,
@@ -24,9 +28,15 @@ export default class FormFields extends Component {
   }
 
   handleChange(id, val) {
+
+    if (id === "total") {
+      this.total = val;
+      this.manualInput = true;
+    }
     this.setState({
       [id]: val
     });
+
   }
 
   componentDidMount() {
@@ -57,13 +67,14 @@ export default class FormFields extends Component {
   }
 
   handleItemChange(index, type, val) {
+    if (type === "price") {
+      this.manualInput = false;
+    }
     let temp = [...this.state.items];
     if (type === "item") {
       temp[index].name = val;
     } else {
       temp[index].price = parseFloat(val).toFixed(2);
-
-
     }
     this.setState({
       items: temp
@@ -105,7 +116,11 @@ export default class FormFields extends Component {
       // total: parseFloat(this.state.total).toFixed(2)
     };
     this.props.submit(itemObj);
+<<<<<<< HEAD
 >>>>>>> working Total Amount
+=======
+
+>>>>>>> improvments for totalUpdate
   }
 
   generateKeyOrValueInputs(isKey) {
@@ -116,7 +131,6 @@ export default class FormFields extends Component {
 
 
     if (this.props.editActive && this.props.expense.items.length !== 0) {
-
       for (let i = 0; i < this.state.pairCount; i++) {
 
         inputElements.push(<TextInput
@@ -137,6 +151,7 @@ export default class FormFields extends Component {
 
     } else {
       for (let i = 0; i < this.state.pairCount + 1; i++) {
+
         inputElements.push(<TextInput
           placeholder={`${inputType} ${i + 1}`}
           id={inputId}
@@ -147,18 +162,19 @@ export default class FormFields extends Component {
       }
     }
 
-    if (inputId === "price") {
-      for (let i = 0; i < this.state.items.length; i++) {
-        tmpPrice = Number(tmpPrice) + Number(this.state.items[i].price);
-      }
-      this.total = tmpPrice;
-      for (i = 0; i < this.state.fields.length; i++) {
-        if (this.state.fields[i].id === "total") {
-          this.total ? this.state.fields[i].name = this.total.toString() : "";
+    if (this.manualInput === false) {
+      if (inputId === "price") {
+        for (let i = 0; i < this.state.items.length; i++) {
+          tmpPrice = Number(tmpPrice) + Number(this.state.items[i].price);
+        }
+        this.total = tmpPrice;
+        for (i = 0; i < this.state.fields.length; i++) {
+          if (this.state.fields[i].id === "total") {
+            this.total ? this.state.fields[i].name = this.total.toString() : "";
 
+          }
         }
       }
-
     }
     return inputElements;
   }
