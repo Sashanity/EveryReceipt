@@ -9,11 +9,15 @@ import AddItemButton from "../ItemEntry/AddItemButton";
 
 
 
+
+
 export default class FormFields extends Component {
   constructor(props) {
     super(props);
     this.manualInput = false;
     this.total = 0;
+    // this.state = initialState;
+    this.editOn = false;
     this.state = {
       pairCount: 0,
       store: "",
@@ -27,8 +31,30 @@ export default class FormFields extends Component {
     };
   }
 
-  handleChange(id, val) {
+  resetForm() {
+    console.log("resetForm()")
+    this.manualInput = false;
+    this.total = 0;
 
+    this.setState({
+
+      pairCount: 0,
+      store: "",
+      total: 0,
+      fields: [
+        { name: "Store Name", id: "store" },
+        { name: "Items", id: "items" },
+        { name: "Total Amount", id: "total" },
+      ],
+      items: [{}]
+
+    });
+    // console.log(this.state.fields)
+    // console.log(this.state.items)
+  }
+
+  handleChange(id, val) {
+    console.log("call handleChange()")
     if (id === "total") {
       this.total = val;
       this.manualInput = true;
@@ -117,13 +143,19 @@ export default class FormFields extends Component {
     };
     this.props.submit(itemObj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> working Total Amount
 =======
+=======
+    // this.resetForm();
+
+>>>>>>> totalUpdate
 
 >>>>>>> improvments for totalUpdate
   }
 
   generateKeyOrValueInputs(isKey) {
+    console.log("call generateKeyOrValueInputs(isKey) ")
     let inputType = (isKey ? "Item name" : "Price");
     let inputId = (isKey ? "item" : "price");
     let inputElements = [];
@@ -131,11 +163,13 @@ export default class FormFields extends Component {
 
 
     if (this.props.editActive && this.props.expense.items.length !== 0) {
+      this.editOn = true;
+
       for (let i = 0; i < this.state.pairCount; i++) {
 
         inputElements.push(<TextInput
           placeholder={`${inputType} ${i}`}
-          defaultValue={
+          defaultValue={ //sets the names and prices of the existing entries
             this.props.editActive && i < this.props.expense.items.length ?
               isKey ?
                 this.props.expense.items[i].name
@@ -147,8 +181,8 @@ export default class FormFields extends Component {
           onChangeText={(text) => this.handleItemChange(i, inputId, text)}
         />);
 
-      }
 
+      }
     } else {
       for (let i = 0; i < this.state.pairCount + 1; i++) {
 
@@ -162,6 +196,9 @@ export default class FormFields extends Component {
       }
     }
 
+
+    //updating the name of the total field aka updating UI
+
     if (this.manualInput === false) {
       if (inputId === "price") {
         for (let i = 0; i < this.state.items.length; i++) {
@@ -170,12 +207,15 @@ export default class FormFields extends Component {
         this.total = tmpPrice;
         for (i = 0; i < this.state.fields.length; i++) {
           if (this.state.fields[i].id === "total") {
+            console.log("this.total", this.total)
+            //sets the total as a name of the total field
             this.total ? this.state.fields[i].name = this.total.toString() : "";
 
           }
         }
       }
     }
+
     return inputElements;
   }
 
