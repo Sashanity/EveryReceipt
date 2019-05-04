@@ -7,16 +7,11 @@ import CommonButton from "./CommonButton";
 import AddItemButton from "../ItemEntry/AddItemButton";
 
 
-
-
-
-
 export default class FormFields extends Component {
   constructor(props) {
     super(props);
     this.manualInput = false;
     this.total = 0;
-    // this.state = initialState;
     this.editOn = false;
     this.state = {
       pairCount: 0,
@@ -40,7 +35,7 @@ export default class FormFields extends Component {
 
       pairCount: 0,
       store: "",
-      total: 0,
+      // total: 0,
       fields: [
         { name: "Store Name", id: "store" },
         { name: "Items", id: "items" },
@@ -67,6 +62,7 @@ export default class FormFields extends Component {
 
   componentDidMount() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.ensureValesSaved();
   }
 
@@ -74,6 +70,9 @@ export default class FormFields extends Component {
     if(this.props.editActive && this.props.expense.items.length !== 0)
     { 
 =======
+=======
+    console.log("call componentDidMount")
+>>>>>>> totalUpdate update
     if (this.props.editActive && this.props.expense.items.length !== 0) {
 >>>>>>> total update that doent work
       this.setState({
@@ -91,7 +90,6 @@ export default class FormFields extends Component {
       });
     }
   }
-
   handleItemChange(index, type, val) {
     if (type === "price") {
       this.manualInput = false;
@@ -141,13 +139,18 @@ export default class FormFields extends Component {
       total: parseFloat(this.total).toFixed(2)
       // total: parseFloat(this.state.total).toFixed(2)
     };
+    this.resetForm();
     this.props.submit(itemObj);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> working Total Amount
 =======
 =======
     // this.resetForm();
+=======
+
+>>>>>>> totalUpdate update
 
 >>>>>>> totalUpdate
 
@@ -156,6 +159,8 @@ export default class FormFields extends Component {
 
   generateKeyOrValueInputs(isKey) {
     console.log("call generateKeyOrValueInputs(isKey) ")
+    // console.log(this.state.items)
+
     let inputType = (isKey ? "Item name" : "Price");
     let inputId = (isKey ? "item" : "price");
     let inputElements = [];
@@ -210,7 +215,6 @@ export default class FormFields extends Component {
             console.log("this.total", this.total)
             //sets the total as a name of the total field
             this.total ? this.state.fields[i].name = this.total.toString() : "";
-
           }
         }
       }
