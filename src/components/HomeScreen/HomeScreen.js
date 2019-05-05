@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD
 import { Modal, Text, View, ScrollView} from "react-native";
+=======
+import { TouchableOpacity, Text, View, ScrollView } from "react-native";
+>>>>>>> fixed UI in editing mode, added little UI improvements
 import AddButton from "./AddButton.js";
 import ExpenseList from "../Common/ExpenseList.js";
 import CommonButton from "../Common/CommonButton.js";
@@ -12,12 +16,14 @@ import { key } from "../../config/api_key";
 import { ImagePicker, Permissions, Constants } from "expo";
 
 
+
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
       buttons: [
+<<<<<<< HEAD
         {title: "Logout", onPress: this.logout.bind(this)},
         {title: "Profile", onPress: this.goToProfile.bind(this)},
         {title: "Search Expenses", onPress: this.goToSearch.bind(this)}
@@ -25,6 +31,12 @@ class HomeScreen extends React.Component {
       modalVisible: false,
       valueParsed: false,
       parsedObj: { }
+=======
+        { title: "Logout", onPress: this.logout.bind(this) },
+        { title: "Profile", onPress: this.goToProfile.bind(this) },
+        { title: "Search Expenses", onPress: this.goToSearch.bind(this) }
+      ]
+>>>>>>> fixed UI in editing mode, added little UI improvements
     };
   }
   componentDidMount() {

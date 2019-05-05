@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { View, TextInput, Button, ScrollView } from "react-native";
+import { View, TextInput, Button, ScrollView, Alert } from "react-native";
 import { styles } from "./styles";
 import { addExpense } from "../../actions/expenseActions";
 import { connect } from "react-redux";
 import CommonButton from "./CommonButton";
 import AddItemButton from "../ItemEntry/AddItemButton";
+
+
+
 
 
 export default class FormFields extends Component {
@@ -27,29 +30,22 @@ export default class FormFields extends Component {
   }
 
   resetForm() {
-    // console.log("resetForm()")
     this.manualInput = false;
     this.total = 0;
-
     this.setState({
-
       pairCount: 0,
       store: "",
-      // total: 0,
       fields: [
         { name: "Store Name", id: "store" },
         { name: "Items", id: "items" },
         { name: "Total Amount", id: "total" },
       ],
       items: [{}]
-
     });
-    // console.log(this.state.fields)
-    // console.log(this.state.items)
   }
 
   handleChange(id, val) {
-    // console.log("call handleChange()")
+    //console.log("call handleChange()")
     if (id === "total") {
       this.total = val;
       this.manualInput = true;
@@ -94,6 +90,8 @@ export default class FormFields extends Component {
       });
     }
   }
+
+
   handleItemChange(index, type, val) {
     if (type === "price") {
       this.manualInput = false;
@@ -143,6 +141,7 @@ export default class FormFields extends Component {
       total: parseFloat(this.total).toFixed(2)
       // total: parseFloat(this.state.total).toFixed(2)
     };
+<<<<<<< HEAD
     this.resetForm();
     this.props.submit(itemObj);
 <<<<<<< HEAD
@@ -157,13 +156,28 @@ export default class FormFields extends Component {
 >>>>>>> totalUpdate update
 
 >>>>>>> totalUpdate
+=======
+
+    this.props.submit(itemObj);
+    Alert.alert(
+      "Success!",
+      "Receipt added to your list",
+      [
+        { text: "OK", onPress: "" },
+      ],
+      { cancelable: false }
+    );
+
+    this.resetForm();
+    // console.log(this.state.items)
+>>>>>>> fixed UI in editing mode, added little UI improvements
 
 >>>>>>> improvments for totalUpdate
   }
 
   generateKeyOrValueInputs(isKey) {
-    // console.log("call generateKeyOrValueInputs(isKey) ")
-    // console.log(this.state.items)
+
+    console.log("call generateKeyOrValueInputs(isKey) ")
 
     let inputType = (isKey ? "Item name" : "Price");
     let inputId = (isKey ? "item" : "price");
@@ -205,6 +219,9 @@ export default class FormFields extends Component {
       }
     }
 
+    if (this.editOn === true) {
+      this.total ? this.props.expense.total = this.total : "";
+    }
 
     //updating the name of the total field aka updating UI
 
@@ -216,8 +233,6 @@ export default class FormFields extends Component {
         this.total = tmpPrice;
         for (i = 0; i < this.state.fields.length; i++) {
           if (this.state.fields[i].id === "total") {
-            // console.log("this.total", this.total)
-            //sets the total as a name of the total field
             this.total ? this.state.fields[i].name = this.total.toString() : "";
           }
         }
