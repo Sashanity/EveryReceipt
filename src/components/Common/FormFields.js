@@ -27,7 +27,7 @@ export default class FormFields extends Component {
   }
 
   resetForm() {
-    console.log("resetForm()")
+    // console.log("resetForm()")
     this.manualInput = false;
     this.total = 0;
 
@@ -49,7 +49,7 @@ export default class FormFields extends Component {
   }
 
   handleChange(id, val) {
-    console.log("call handleChange()")
+    // console.log("call handleChange()")
     if (id === "total") {
       this.total = val;
       this.manualInput = true;
@@ -63,6 +63,7 @@ export default class FormFields extends Component {
   componentDidMount() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.ensureValesSaved();
   }
 
@@ -73,6 +74,9 @@ export default class FormFields extends Component {
 =======
     console.log("call componentDidMount")
 >>>>>>> totalUpdate update
+=======
+    // console.log("call componentDidMount")
+>>>>>>> ss
     if (this.props.editActive && this.props.expense.items.length !== 0) {
 >>>>>>> total update that doent work
       this.setState({
@@ -158,7 +162,7 @@ export default class FormFields extends Component {
   }
 
   generateKeyOrValueInputs(isKey) {
-    console.log("call generateKeyOrValueInputs(isKey) ")
+    // console.log("call generateKeyOrValueInputs(isKey) ")
     // console.log(this.state.items)
 
     let inputType = (isKey ? "Item name" : "Price");
@@ -212,7 +216,7 @@ export default class FormFields extends Component {
         this.total = tmpPrice;
         for (i = 0; i < this.state.fields.length; i++) {
           if (this.state.fields[i].id === "total") {
-            console.log("this.total", this.total)
+            // console.log("this.total", this.total)
             //sets the total as a name of the total field
             this.total ? this.state.fields[i].name = this.total.toString() : "";
           }

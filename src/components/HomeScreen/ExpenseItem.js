@@ -83,13 +83,8 @@ export default class ExpenseItem extends React.Component {
         {this.renderDeleteButton(item)}
 =======
         <View style={styles.deleteBtn}>
-<<<<<<< HEAD
           <Button title="x" color="#ff0000"
-            onPress={() => {  
-=======
-          <Button title="x"
             onPress={() => {
->>>>>>> working Total Amount
               this.props.handleDelete(item.id);
             }} />
         </View>
