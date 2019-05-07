@@ -111,7 +111,8 @@ export default class FormFields extends Component {
       temp[index].name = val;
 
     } else {
-      temp[index].price = parseFloat(val).toFixed(2);
+      // temp[index].price = parseFloat(val).toFixed(2);
+      temp[index].price = val
 
     }
 
