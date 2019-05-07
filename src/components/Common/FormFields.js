@@ -7,10 +7,6 @@ import CommonButton from "./CommonButton";
 import AddItemButton from "../ItemEntry/AddItemButton";
 
 
-
-
-
-
 export default class FormFields extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +15,7 @@ export default class FormFields extends Component {
     this.def = "";
     this.editOn = false;
     this.state = {
+      isCameraEnabled: false,
       pairCount: 0,
       store: "",
       total: 0,
@@ -112,7 +109,7 @@ export default class FormFields extends Component {
 
     } else {
       // temp[index].price = parseFloat(val).toFixed(2);
-      temp[index].price = val
+      temp[index].price = val;
 
     }
 
