@@ -1,6 +1,6 @@
 import React from "react";
 <<<<<<< HEAD
-import { Modal, Text, View, ScrollView} from "react-native";
+import { Modal, Text, View, ScrollView } from "react-native";
 =======
 import { TouchableOpacity, Text, View, ScrollView } from "react-native";
 >>>>>>> fixed UI in editing mode, added little UI improvements
@@ -23,20 +23,13 @@ class HomeScreen extends React.Component {
     this.state = {
       loading: false,
       buttons: [
-<<<<<<< HEAD
-        {title: "Logout", onPress: this.logout.bind(this)},
-        {title: "Profile", onPress: this.goToProfile.bind(this)},
-        {title: "Search Expenses", onPress: this.goToSearch.bind(this)}
-      ],
-      modalVisible: false,
-      valueParsed: false,
-      parsedObj: { }
-=======
         { title: "Logout", onPress: this.logout.bind(this) },
         { title: "Profile", onPress: this.goToProfile.bind(this) },
         { title: "Search Expenses", onPress: this.goToSearch.bind(this) }
-      ]
->>>>>>> fixed UI in editing mode, added little UI improvements
+      ],
+      modalVisible: false,
+      valueParsed: false,
+      parsedObj: {}
     };
   }
   componentDidMount() {
@@ -81,7 +74,7 @@ class HomeScreen extends React.Component {
 
   handleCloudOCR = async (uri) => {
     if (typeof uri === "undefined") return;
-    
+
     try {
       let body = JSON.stringify({
         requests: [
@@ -97,7 +90,7 @@ class HomeScreen extends React.Component {
       });
       let response = await fetch(
         "https://vision.googleapis.com/v1/images:annotate?key=" +
-          key,
+        key,
         {
           headers: {
             Accept: "application/json",
@@ -109,19 +102,19 @@ class HomeScreen extends React.Component {
       );
 
       let store = null;
-      
+
       let test = JSON.stringify(response);
-      test = 
+      test =
         test.substring(
           test.lastIndexOf("\"text\\"), test.lastIndexOf("}"));
       test = test.split("\\n");
 
       let result = -1;
-      for(var i in test) {
-        if(test[i].toLowerCase().indexOf("total") !== -1 &&
-        test[i].toLowerCase().indexOf("subtotal") === -1) {
+      for (var i in test) {
+        if (test[i].toLowerCase().indexOf("total") !== -1 &&
+          test[i].toLowerCase().indexOf("subtotal") === -1) {
           let total = test[i].match(/\d+(?:\.\d+)?/g);
-          if(total !== null) {
+          if (total !== null) {
             result = total[0];
           }
           break;
@@ -134,9 +127,9 @@ class HomeScreen extends React.Component {
           store = "Walgreens";
         }
       }
-      
-      if(result !== -1 || store !== null) {
-        
+
+      if (result !== -1 || store !== null) {
+
         const parsedObj = {
           total: result === -1 ? "" : result,
           store: store === null ? "" : store
@@ -152,11 +145,11 @@ class HomeScreen extends React.Component {
       } else {
         this.setModalVisible();
       }
-    } catch(err) { }
+    } catch (err) { }
   }
 
   handleAddingOCRItem(item) {
-    if(this.state.valueParsed) {
+    if (this.state.valueParsed) {
       this.props.navigation.navigate("ManualAddScreen", {
         ocrValue: item
       });
@@ -215,7 +208,7 @@ class HomeScreen extends React.Component {
                 Sorry, we coulnd't get anything from your scan!
               </Text>
             </View>
-          </Modal> 
+          </Modal>
           <ScrollView>
             <ExpenseList
               expenses={expenses}
