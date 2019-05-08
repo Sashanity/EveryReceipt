@@ -14,25 +14,25 @@ export default class ExpenseItem extends React.Component {
     this.setState({
       displayOnly: typeof this.props.displayOnly !== "undefined"
     });
-  }  
+  }
 
   renderDeleteButton(item) {
-    if(this.state.displayOnly) {
+    if (this.state.displayOnly) {
       return;
     } else {
       return (
         <View style={styles.deleteBtn}>
           <Button title="x" color="#ff0000"
-            onPress={() => {  
+            onPress={() => {
               this.props.handleDelete(item.id);
-            }} /> 
+            }} />
         </View>
       );
     }
   }
 
   handleEdit(item) {
-    if(!this.state.displayOnly) {
+    if (!this.state.displayOnly) {
       this.props.toggleEdit(item);
     }
   }
@@ -47,28 +47,17 @@ export default class ExpenseItem extends React.Component {
               {item.store}
             </Text>
             {
-<<<<<<< HEAD
-              typeof item.items.length === 0 ? <React.Fragment/> :
+              typeof item.items.length === 0 ? <React.Fragment /> :
                 item.items.map((x, key) => {
                   return (
                     <React.Fragment key={key}>
-                      {x.name !== "" && x.price !== "" 
-                        && typeof x.name !== "undefined" 
-                        && typeof x.price !== "undefined"?
+                      {x.name !== "" && x.price !== ""
+                        && typeof x.name !== "undefined"
+                        && typeof x.price !== "undefined" ?
                         <Text>
                           {x.name} , ${x.price}
                         </Text>
-                        : <React.Fragment/>
-=======
-              typeof item.items.length === 0 ? <React.Fragment /> :
-                item.items.map((x) => {
-                  return (
-                    <React.Fragment key={Math.random(100)}>
-                      {x &&
-                        <Text>
-                          {x.name} , ${x.price}
-                        </Text>
->>>>>>> working Total Amount
+                        : <React.Fragment />
                       }
                     </React.Fragment>
                   );
@@ -79,16 +68,7 @@ export default class ExpenseItem extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-<<<<<<< HEAD
         {this.renderDeleteButton(item)}
-=======
-        <View style={styles.deleteBtn}>
-          <Button title="x" color="#ff0000"
-            onPress={() => {
-              this.props.handleDelete(item.id);
-            }} />
-        </View>
->>>>>>> working Total Amount
       </View>
     );
   }
