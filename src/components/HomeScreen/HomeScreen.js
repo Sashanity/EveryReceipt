@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import { Modal, Text, View, ScrollView } from "react-native";
-=======
-import { TouchableOpacity, Text, View, ScrollView } from "react-native";
->>>>>>> fixed UI in editing mode, added little UI improvements
 import AddButton from "./AddButton.js";
 import ExpenseList from "../Common/ExpenseList.js";
 import CommonButton from "../Common/CommonButton.js";
