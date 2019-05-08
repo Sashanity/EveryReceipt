@@ -367,4 +367,3 @@ export default class FormFields extends Component {
     );
   }
 }
-
