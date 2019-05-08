@@ -61,39 +61,12 @@ export default class FormFields extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this.ensureValesSaved();
-  }
-
-  ensureValesSaved() {
-    if(this.props.editActive && this.props.expense.items.length !== 0)
-    { 
-=======
-=======
-    console.log("call componentDidMount")
->>>>>>> totalUpdate update
-=======
-    // console.log("call componentDidMount")
->>>>>>> ss
-=======
->>>>>>> working totalUpdate in both modes, resetForm function added
     if (this.props.editActive && this.props.expense.items.length !== 0) {
->>>>>>> total update that doent work
       this.setState({
         store: this.props.expense.store,
         total: this.props.expense.total,
         items: this.props.expense.items,
         pairCount: this.props.expense.items.length
-      });
-    }
-    else if(this.props.fromOCR)
-    {
-      this.setState({
-        store: this.props.expense.store,
-        total: this.props.expense.total
       });
     }
   }
@@ -120,55 +93,12 @@ export default class FormFields extends Component {
   }
 
   addItemToDB() {
-<<<<<<< HEAD
-    const { items, store, total } = this.state;
-    let expenseItems = [];
-    let valid = true;
-    for(let i = 0; i < items.length; i++) {
-      if(typeof items[i].name !== "undefined" && 
-        typeof items[i].price !== "undefined") {
-        expenseItems.push(items[i]);
-      }
-    }
-    if(typeof store === "undefined" || store === "" 
-    || total === 0 || total === "") {
-      valid = false;
-    }
-
-    if(valid) {
-      let itemObj = {
-        store: this.state.store,
-        items: expenseItems,
-        total: parseFloat(this.state.total).toFixed(2)
-      };
-      this.props.submit(itemObj);
-    } else {
-      this.props.error();
-    }
-
-=======
     let itemObj = {
       store: this.state.store,
       items: this.state.items,
       total: parseFloat(this.total).toFixed(2)
       // total: parseFloat(this.state.total).toFixed(2)
     };
-<<<<<<< HEAD
-    this.resetForm();
-    this.props.submit(itemObj);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> working Total Amount
-=======
-=======
-    // this.resetForm();
-=======
-
->>>>>>> totalUpdate update
-
->>>>>>> totalUpdate
-=======
 
     this.props.submit(itemObj);
 
@@ -183,13 +113,6 @@ export default class FormFields extends Component {
     );
 
     this.resetForm();
-<<<<<<< HEAD
-    // console.log(this.state.items)
->>>>>>> fixed UI in editing mode, added little UI improvements
-
->>>>>>> improvments for totalUpdate
-=======
->>>>>>> working totalUpdate in both modes, resetForm function added
   }
 
   generateKeyOrValueInputs(isKey) {
@@ -275,15 +198,6 @@ export default class FormFields extends Component {
     let entries = [1, 0];
     return (
       <React.Fragment key={"items-entry"}>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <View style={styles.row}>
-          {entries.map((x) => {
-            return ( 
-=======
-<<<<<<< HEAD
-=======
->>>>>>> s
         <ScrollView>
           <View style={styles.row}>
             {entries.map((x) => {
@@ -295,24 +209,6 @@ export default class FormFields extends Component {
             })}
           </View>
         </ScrollView>
-<<<<<<< HEAD
-=======
-        <View style={styles.row}>
-          {entries.map((x) => {
-            return (
->>>>>>> total update that doent work
-              <View key={x} style={styles.col}>
-                {this.generateKeyOrValueInputs(x)}
-              </View>
-            );
-          })}
-        </View>
-<<<<<<< HEAD
-=======
->>>>>>> total update that doent work
->>>>>>> total update that doent work
-=======
->>>>>>> s
         <View style={styles.row}>
           <AddItemButton
             onPress={this.addKeyValuePair.bind(this)}
@@ -334,8 +230,7 @@ export default class FormFields extends Component {
               <TextInput
                 key={f.id}
                 style={styles.input}
-                defaultValue={this.props.editActive || this.props.fromOCR
-                  ? this.props.expense[f.id] : ""}
+                defaultValue={this.props.editActive ? this.props.expense[f.id] : ""}
                 textAlign="center"
                 underlineColorAndroid="transparent"
                 placeholder={f.name}
