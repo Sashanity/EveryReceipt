@@ -236,17 +236,15 @@ export default class FormFields extends Component {
     let entries = [1, 0];
     return (
       <React.Fragment key={"items-entry"}>
-        <ScrollView>
-          <View style={styles.row}>
-            {entries.map((x) => {
-              return (
-                <View key={x} style={styles.col}>
-                  {this.generateKeyOrValueInputs(x)}
-                </View>
-              );
-            })}
-          </View>
-        </ScrollView>
+        <View style={styles.row}>
+          {entries.map((x) => {
+            return (
+              <View key={x} style={styles.col}>
+                {this.generateKeyOrValueInputs(x)}
+              </View>
+            );
+          })}
+        </View>
         <View style={styles.row}>
           <AddItemButton
             onPress={this.addKeyValuePair.bind(this)}
@@ -261,37 +259,23 @@ export default class FormFields extends Component {
   render() {
     return (
       <View style={styles.col}>
-
         {this.state.fields.map((f) => {
           return (
-            f.id !== "items" && f.id != "store" ?
+            f.id !== "items" ?
               <TextInput
                 key={f.id}
                 style={styles.input}
-                defaultValue={this.props.editActive ? this.props.expense[f.id] : ""}
+                defaultValue={this.props.editActive || this.props.fromOCR
+                  ? this.props.expense[f.id] : ""}
                 textAlign="center"
                 underlineColorAndroid="transparent"
                 placeholder={f.name}
                 onChangeText={(text) => this.handleChange(f.id, text)}
-
-
               />
-              : f.id === "store" ?
-                <TextInput
-                  key={f.id}
-                  style={styles.input}
-                  defaultValue={this.props.editActive ? this.props.expense[f.id] : ""}
-                  textAlign="center"
-                  underlineColorAndroid="transparent"
-                  placeholder={f.name}
-                  onChangeText={(text) => this.handleChange(f.id, text)}
-                  value={f.value} />
-                :
-                this.renderItemsEntry()
+              :
+              this.renderItemsEntry()
           );
         })}
-
-
         <CommonButton
           text={this.props.submitText ? this.props.submitText : "Submit"}
           onPress={this.addItemToDB.bind(this)}
