@@ -93,26 +93,64 @@ export default class FormFields extends Component {
   }
 
   addItemToDB() {
-    let itemObj = {
-      store: this.state.store,
-      items: this.state.items,
-      total: parseFloat(this.total).toFixed(2)
-      // total: parseFloat(this.state.total).toFixed(2)
-    };
+    const { items, store, total } = this.state;
+    let expenseItems = [];
+    let valid = true;
+    for (let i = 0; i < items.length; i++) {
+      if (typeof items[i].name !== "undefined" &&
+        typeof items[i].price !== "undefined") {
+        expenseItems.push(items[i]);
+      }
+    }
+    if (typeof store === "undefined" || store === ""
+      || total === 0 || total === "") {
+      valid = false;
+    }
 
-    this.props.submit(itemObj);
-
-    this.editOn ? msg = "Receipt modified" : msg = "Receipt added to your list";
+    if (valid) {
+      let itemObj = {
+        store: this.state.store,
+        items: expenseItems,
+        total: parseFloat(this.state.total).toFixed(2)
+      };
+      this.props.submit(itemObj);
+      this.resetForm();
+      msgTitle = "Success!";
+      msg = "Receipt added to your list";
+    } else {
+      this.props.error();
+      msgTitle = "Oops!";
+      msg = "Receipt NOT added to your list";
+    }
+    this.editOn ? msg = "Receipt modified" : "";
     Alert.alert(
-      "Success!",
+      msgTitle,
       msg,
       [
         { text: "OK", onPress: "" },
       ],
       { cancelable: false }
     );
+    // let itemObj = {
+    //   store: this.state.store,
+    //   items: this.state.items,
+    //   total: parseFloat(this.total).toFixed(2)
+    //   // total: parseFloat(this.state.total).toFixed(2)
+    // };
 
-    this.resetForm();
+    // this.props.submit(itemObj);
+
+    // this.editOn ? msg = "Receipt modified" : msg = "Receipt added to your list";
+    // Alert.alert(
+    //   "Success!",
+    //   msg,
+    //   [
+    //     { text: "OK", onPress: "" },
+    //   ],
+    //   { cancelable: false }
+    // );
+
+    // this.resetForm();
   }
 
   generateKeyOrValueInputs(isKey) {
