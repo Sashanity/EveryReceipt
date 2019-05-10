@@ -60,18 +60,32 @@ export default class FormFields extends Component {
 
   }
 
+
+
   componentDidMount() {
-    if (this.props.editActive && this.props.expense.items.length !== 0) {
+    this.ensureValesSaved();
+  }
+
+  ensureValesSaved() {
+
+    let { expense } = this.props;
+    if (this.props.editActive) {
+      let count = expense.items.length;
+      let items = expense.items.length ? expense.items : [{}];
       this.setState({
-        store: this.props.expense.store,
-        total: this.props.expense.total,
-        items: this.props.expense.items,
-        pairCount: this.props.expense.items.length
+        store: expense.store,
+        total: expense.total,
+        items: items,
+        pairCount: count
+      });
+    }
+    else if (this.props.fromOCR) {
+      this.setState({
+        store: expense.store,
+        total: expense.total
       });
     }
   }
-
-
   handleItemChange(index, type, val) {
     if (type === "price") {
       this.manualInput = false;
@@ -92,28 +106,6 @@ export default class FormFields extends Component {
 
   }
 
-  // addItemToDB() {
-  //   let itemObj = {
-  //     store: this.state.store,
-  //     items: this.state.items,
-  //     total: parseFloat(this.total).toFixed(2)
-  //     // total: parseFloat(this.state.total).toFixed(2)
-  //   };
-
-  //   this.props.submit(itemObj);
-
-  //   this.editOn ? msg = "Receipt modified" : msg = "Receipt added to your list";
-  //   Alert.alert(
-  //     "Success!",
-  //     msg,
-  //     [
-  //       { text: "OK", onPress: "" },
-  //     ],
-  //     { cancelable: false }
-  //   );
-
-  //   this.resetForm();
-  // }
   addItemToDB() {
     this.total ? this.state.total = this.total : "";
     const { items, store, total } = this.state;
@@ -222,7 +214,18 @@ export default class FormFields extends Component {
           }
         }
       }
+    } else {
+      for (i = 0; i < this.state.fields.length; i++) {
+        if (this.state.fields[i].id === "total") {
+          this.state.fields[i].name = this.state.total.toString();
+        }
+        if (this.state.fields[i].id === "store") {
+          this.state.fields[i].name = this.state.store;
+        }
+      }
     }
+
+
 
     return inputElements;
 
